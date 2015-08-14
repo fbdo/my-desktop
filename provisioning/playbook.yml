@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+    - name: install git
+      apt: name=git state=latest

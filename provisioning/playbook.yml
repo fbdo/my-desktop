@@ -3,3 +3,17 @@
   tasks:
     - name: install git
       apt: name=git state=latest
+
+    - name: install package software-properties-common, a ansible requirement
+      apt: name=software-properties-common state=latest
+
+    - name: add ansible package repository
+      apt_repository: repo='ppa:ansible/ansible'
+    
+    - name: update package cache
+      apt: update_cache=yes
+
+    - name: install ansible
+      apt: name=ansible state=latest
+
+    

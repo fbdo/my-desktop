@@ -54,4 +54,14 @@
     - name: Install Skype
       apt: name=skype state=latest
 
+    # Install Google Chrome
+    - name: Add Google signing key
+      apt_key: url=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+    - name: Add Google repository
+      apt_repository: repo='deb http://dl.google.com/linux/chrome/deb/ stable main' state=present update_cache=yes
+
+    - name: Add Google Chrome
+      apt: name=google-chrome-stable state=latest
+
 

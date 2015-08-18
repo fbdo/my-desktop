@@ -8,10 +8,7 @@
       apt: name=software-properties-common state=latest
 
     - name: add ansible package repository
-      apt_repository: repo='ppa:ansible/ansible'
-    
-    - name: update package cache
-      apt: update_cache=yes
+      apt_repository: repo='ppa:ansible/ansible' update_cache=yes
 
     - name: install ansible
       apt: name=ansible state=latest
@@ -25,31 +22,22 @@
     - name: Install libgcrypt11
       apt: deb='/tmp/libgcrypt11_1.5.4-2ubuntu1.1_amd64.deb'
 
-    - name: Add Spotify repository
-      apt_repository: repo="deb http://repository.spotify.com stable non-free" state=present
-
     - name: Add Spotify public key
       apt_key: keyserver=keyserver.ubuntu.com id=D2C19886 state=present
 
-    - name: Update package manager
-      apt: update_cache=yes
+    - name: Add Spotify repository
+      apt_repository: repo="deb http://repository.spotify.com stable non-free" state=present update_cache=yes
 
     - name: Install latest spotify package
-      apt: pkg="{{ item }}" state=latest force=yes
-      with_items:
-        - spotify-client
+      apt: name=spotify-client state=latest
       
     # Create my user, to generate the crypted password, see http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
     - name: Create my main user
       user: name=fabio password=$6$1U7Bd3AhPo$8.gb1qBMmJNVXJzqdvkNQP2pOrd6ZHCi5zp5yLScj8/rSF8rEfHBk9LQhAH.RyPx/YdZhXlutgX9o4daAXgDe. groups=adm,cdrom,sudo,dip,plugdev,lpadmin,sambashare
     
-
     # Install Skype
     - name: Add Canonical Partners repository
-      apt_repository: repo='deb http://archive.canonical.com/ubuntu vivid partner' state=present
-
-    - name: update package cache
-      apt: update_cache=yes
+      apt_repository: repo='deb http://archive.canonical.com/ubuntu vivid partner' state=present update_cache=yes
 
     - name: Install Skype
       apt: name=skype state=latest

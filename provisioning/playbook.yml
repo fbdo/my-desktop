@@ -39,5 +39,7 @@
       with_items:
         - spotify-client
       
-
+    # Create my user
+    - name: Create my main user
+      user: name=fabio password=$6$1U7Bd3AhPo$8.gb1qBMmJNVXJzqdvkNQP2pOrd6ZHCi5zp5yLScj8/rSF8rEfHBk9LQhAH.RyPx/YdZhXlutgX9o4daAXgDe. groups=adm,cdrom,sudo,dip,plugdev,lpadmin,sambashare
     

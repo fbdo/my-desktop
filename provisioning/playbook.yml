@@ -73,4 +73,19 @@
     - name: Install Vagrant
       apt: deb='/tmp/vagrant.deb'
 
+    # Install Packer
+    - name: Create Applications directory
+      file: path=/home/fabio/Applications/packer state=directory owner=fabio group=fabio mode=0755
 
+    - name: Download Packer
+      get_url: url='https://dl.bintray.com/mitchellh/packer/packer_0.8.6_linux_amd64.zip' dest='/tmp/packer.zip'
+
+    - name: Unpack Packer
+      unarchive: src=/tmp/packer.zip dest=/home/fabio/Applications/packer copy=no
+
+    - name: Create bin directory
+      file: path=/home/fabio/bin state=directory owner=fabio group=fabio mode=0755
+
+    - name: Create symlinkto packer executable
+      file: path=/home/fabio/bin/packer state=link src=/home/fabio/Applications/packer/packer
+      

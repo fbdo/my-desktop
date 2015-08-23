@@ -89,3 +89,13 @@
     - name: Create symlinkto packer executable
       file: path=/home/fabio/bin/packer state=link src=/home/fabio/Applications/packer/packer
       
+    # Install Java 8
+    - name: Add Java 8 repo
+      apt_repository: repo='ppa:webupd8team/java' update_cache=yes
+
+    - name: auto accept oracle jdk license
+      shell: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+      sudo: yes
+    
+    - name: Add Java 8 package, set it as default
+      apt: name=oracle-java8-set-default state=latest
